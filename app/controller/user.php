@@ -27,6 +27,7 @@ class user extends application
         $userView = new view();
         $userView->loadView("login");
 
+
     }
 
     public function register($id = null) {

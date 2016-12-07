@@ -17,6 +17,9 @@ class view extends application
     }
 
     public function loadView($render = null, $includeTemplate = true, $showFleshMassages = true) {
+        //Fügt Navbar und Footer hinzu und ruft dann loadRender($render) auf
+        //$render ist der im Controller->loadView() übergebene Paramneter
+        //loadRender() ist dies in dieser Klasse definierte funktion, welche die im Ordner render hinterlegten Dateien einbindet
         if ($includeTemplate) include($this->defaultTemplate);
     }
 

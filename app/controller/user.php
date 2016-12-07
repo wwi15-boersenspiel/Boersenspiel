@@ -38,27 +38,55 @@ class user extends application
 
     public function create($id = null) {
         $userModel = new userModel();
-        if ($userModel->createUser($this->request["name"], password_hash($this->request["pw"], PASSWORD_DEFAULT))) {
-            parent::redirectTo(parent::$home_index_path, "success: Account erfolgreich angelegt");
+        if (is_null($userModel->getByName($this->request["name"]))) {
+            if ($userModel->createUser($this->request["name"], password_hash($this->request["pw"], PASSWORD_DEFAULT))) {
+                parent::redirectTo(parent::$home_index_path, "success: Account erfolgreich angelegt");
+            } else {
+                parent::redirectTo(parent::$user_login_path, "danger: Account konnte nicht erstellt werden");
+            }
         } else {
-            parent::redirectTo(parent::$home_login_path, "warning: Account oder ID falsch");
+            parent::redirectTo(parent::$user_login_path, "warning: Benutzername schon vergeben");
         }
+
 
     }
 
     public function control($id = null) {
         $userModel = new userModel();
         if (password_verify($this->request["pw"], $userModel->getByName($this->request["name"])[0]["password"])) {
-            $_SESSION["user"] = $userModel->getByName($this->request["name"])[0]["name"];
+            parent::setCurrentUser($userModel->getByName($this->request["name"])[0]["name"]);
             parent::redirectTo(parent::$home_index_path, "success: Sie wurden erfolgreich engeloggt");
+        } else {
+            parent::redirectTo(parent::$home_login_path, "warning: Account oder ID falsch");
         }
 
     }
 
 
     public function logout($id = null) {
-        parent::setCurentUser(null);
+        parent::setCurrentUser(null);
         parent::redirectTo(parent::$home_index_path, "success: Sie wurden ausgeloggt");
 
+    }
+
+    public function show($id = null) {
+        $userModel = new userModel();
+        $userView = new View();
+        if (is_null($id)) {
+            $userView->addParameter("user", $userModel->getAll());
+            $userView->loadView("show");
+        } else {
+            $userView->addParameter("user", $userModel->getByName($id));
+            $userView->loadView("showID");
+        }
+    }
+
+    public function delete($id = null) {
+        $userModel = new userModel();
+        if ($userModel->deleteUser($id)){
+            parent::redirectTo(parent::$user_show_path, "success: " . $id . " wurde gelöscht");
+        } else {
+            parent::redirectTo(parent::$user_show_path, "danger: " . $id . " konnte nicht gelöscht werden!");
+        }
     }
 }

@@ -28,11 +28,26 @@ class userModel extends mainModel
     {
         $sql = "INSERT INTO user2 (name, password)
         VALUES ('" . $username . "', '" . $pw . "')";
-        if ($this->conn->query($sql) === TRUE) {
+        if ($this->conn->query($sql)) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public function deleteUser($name) {
+        $sql = "DELETE FROM `user2` WHERE `name`='" .  $name . "'";
+        if ($this->conn->query($sql)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getAll() {
+        $sql = "SELECT * FROM `user2`";
+        $result = $this->conn->query($sql);
+        return parent::createArray($result);
     }
 
     function __destruct()

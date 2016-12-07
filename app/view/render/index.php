@@ -8,8 +8,8 @@
 ?>
 
 
-<h1>Hallo <?php if(isset($_SESSION["user"])) {
-        echo $_SESSION["user"];
+<h1>Hallo <?php if(!is_null(parent::getCurrentUser())) {
+        echo parent::getCurrentUser();
             } ?></h1>
 
 <h2>
@@ -21,3 +21,5 @@
 <a href="<?php echo parent::$user_logout_path;?>/">Ausloggen</a>
 <br>
 <a href=<?php echo parent::$user_register_path;?>>Registrieren</a>
+<br>
+<a href="<?php echo parent::$user_show_path;?>">Show</a>

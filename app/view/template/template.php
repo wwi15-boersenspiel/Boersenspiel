@@ -27,7 +27,7 @@
 <body>
 <nav class="light-green accent-3">
     <div class="nav-wrapper">
-        <a href="#" class="brand-logo black-text">Logo</a>
+        <a href="<?php echo parent::$home_index_path?>" class="brand-logo black-text">Logo</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a class="black-text" href="sass.html">Sass</a></li>
             <li><a class="black-text" href="badges.html">Components</a></li>
@@ -50,7 +50,7 @@ if ($showFleshMassages) {
             echo '<div class="alert alert-warning" role="alert">' . $flashMessage[message] . '</div>';
             break;
         case danger:
-            echo '<div class="alert alert-warning" role="alert">' . $flashMessage[message] . '</div>';
+            echo '<div class="alert alert-danger" role="alert">' . $flashMessage[message] . '</div>';
             break;
     }
 }

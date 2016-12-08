@@ -95,7 +95,7 @@ class user extends mainController
 <p>Oder um bei einem Link die richtige Adresse anzugeben:</p>
 
 ```html
-<a href=<?php echo parent::$user_register_path;?>>Registrieren</a>
+<a href="<?php echo parent::$user_register_path;?>">Registrieren</a>
 ```
 
 <p>Einen Link zu einem Controller und einer Methode sollte nie von Hand geschreiben werden, sondern <br>

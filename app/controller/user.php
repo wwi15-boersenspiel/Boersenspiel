@@ -49,7 +49,7 @@ class user extends application
     public function control($id = null) {
         $userModel = new userModel();
         if (password_verify($this->request["pw"], $userModel->getByName($this->request["name"])[0]["password"])) {
-            $_SESSION["user"] = $userModel->getByName($this->request["name"])[0]["name"];
+            parent::setCurrentUser($userModel->getByName($this->request["name"])[0]["name"]);
             parent::redirectTo(parent::$home_index_path, "success: Sie wurden erfolgreich engeloggt");
         }
 
@@ -57,7 +57,7 @@ class user extends application
 
 
     public function logout($id = null) {
-        parent::setCurentUser(null);
+        parent::setCurrentUser(null);
         parent::redirectTo(parent::$home_index_path, "success: Sie wurden ausgeloggt");
 
     }

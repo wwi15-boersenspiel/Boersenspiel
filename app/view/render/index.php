@@ -8,8 +8,8 @@
 ?>
 
 
-<h1>Hallo <?php if(isset($_SESSION["user"])) {
-        echo $_SESSION["user"];
+<h1>Hallo <?php if(!is_null(parent::getCurrentUser())) {
+        echo parent::getCurrentUser();
             } ?></h1>
 
 <h2>

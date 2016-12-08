@@ -16,15 +16,15 @@ class application
     //Müssen auf dem lokalen PC angepasst werden z.B.: aus http://193.196.168.133/... muss http://localhost/.. gemacht werden
 
     //home Controller, beinhaltet alle Starseite bezogenen Seiten
-    public static $home_index_path = 'http://193.196.168.133/home/index'; //Startseite
+    public static $home_index_path = 'http://localhost/home/index'; //Startseite
 
     //user Controller, beinhaltet alle User bezogenen Seiten
-    public static $user_index_path = 'http://193.196.168.133/user/index'; //User Startseite
-    public static $user_login_path = 'http://193.196.168.133/user/login'; //Login Seite
-    public static $user_register_path = 'http://193.196.168.133/user/register'; //Registrierungs Seite
-    public static $user_logout_path = 'http://193.196.168.133/user/logout'; //Wird beim LogOut aufgerufen, rendert keine View sonderte leitet auf die index Seite weiter
-    public static $user_create_path = 'http://193.196.168.133/user/create'; //Wird bei der Registrations aufgerufen, rendert keine View sonderte leitet auf die index Seite weiter
-    public static $user_control_path = 'http://193.196.168.133/user/control'; //Wird beim der LogIn aufgerufen, rendert keine View sonderte leitet auf die index bzw. LogIn Seite weiter
+    public static $user_index_path = 'http://localhost/user/index'; //User Startseite
+    public static $user_login_path = 'http://localhost/user/login'; //Login Seite
+    public static $user_register_path = 'http://localhost/user/register'; //Registrierungs Seite
+    public static $user_logout_path = 'http://localhost/user/logout'; //Wird beim LogOut aufgerufen, rendert keine View sonderte leitet auf die index Seite weiter
+    public static $user_create_path = 'http://localhost/user/create'; //Wird bei der Registrations aufgerufen, rendert keine View sonderte leitet auf die index Seite weiter
+    public static $user_control_path = 'http://localhost/user/control'; //Wird beim der LogIn aufgerufen, rendert keine View sonderte leitet auf die index bzw. LogIn Seite weiter
 
     //Methode die anhand der URL den richtigen Controller und die richtige Methode findet
     //Wird bei jedem Seitenaufruf aufgerufen

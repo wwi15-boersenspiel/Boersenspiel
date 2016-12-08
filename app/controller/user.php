@@ -10,7 +10,7 @@ require_once('app/controller/mainController.php');
  * Date: 07.12.2016
  * Time: 14:59
  */
-class user extends application
+class user extends mainController
 {
 
     public $request = null;
@@ -63,7 +63,7 @@ class user extends application
             parent::setCurrentUser($userModel->getByName($this->request["name"])[0]["name"]);
             parent::redirectTo(parent::$home_index_path, "success: Sie wurden erfolgreich engeloggt");
         } else {
-            parent::redirectTo(parent::$home_login_path, "warning: Account oder ID falsch");
+            parent::redirectTo(parent::$user_login_path, "warning: Account oder ID falsch");
         }
 
     }

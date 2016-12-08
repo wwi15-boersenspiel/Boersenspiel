@@ -23,3 +23,5 @@
 <a href=<?php echo parent::$user_register_path;?>>Registrieren</a>
 <br>
 <a href="<?php echo parent::$user_show_path;?>">Show</a>
+<br>
+<a href="<?php echo parent::$user_search_path;?>">Suchen</a>

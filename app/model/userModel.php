@@ -24,6 +24,15 @@ class userModel extends mainModel
 
     }
 
+
+    public function getByFirstChars($name) {
+
+        $sql = "SELECT * FROM `user2` WHERE `name` LIKE '" . $name . "%'";
+        $result = $this->conn->query($sql);
+        return parent::createArray($result);
+
+    }
+
     public function createUser($username, $pw)
     {
         $sql = "INSERT INTO user2 (name, password)

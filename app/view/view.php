@@ -20,7 +20,11 @@ class view extends application
         //Fügt Navbar und Footer hinzu und ruft dann loadRender($render) auf
         //$render ist der im Controller->loadView() übergebene Paramneter
         //loadRender() ist dies in dieser Klasse definierte funktion, welche die im Ordner render hinterlegten Dateien einbindet
-        if ($includeTemplate) include($this->defaultTemplate);
+        if ($includeTemplate) {
+            include($this->defaultTemplate);
+        } else {
+            $this->loadRender($render);
+        }
     }
 
     public function changeTemplate($template) {
@@ -44,12 +48,12 @@ class view extends application
             if (is_array($render)) {
                 foreach (array_unique($render) as &$eachCSS) {
                     if (file_exists("app/asset/css/" . $eachCSS . ".css")) {
-                        echo '<link rel="stylesheet" href="app/asset/css/' . $eachCSS . '.css">';
+                        echo "<link rel='stylesheet' href='/app/asset/css/" . $eachCSS . ".css'>";
                     }
                 }
             } else {
                 if (file_exists("app/asset/css/" . $render . ".css")) {
-                    echo '<link rel="stylesheet" href="app/asset/css/' . $render . '.css">';
+                    echo "<link rel='stylesheet' href='/app/asset/css/" . $render . ".css'>";
                 }
             }
         }
@@ -60,12 +64,12 @@ class view extends application
             if (is_array($render)) {
                 foreach (array_unique($render) as &$eachJS) {
                     if (file_exists("app/asset/javascript/" . $eachJS . ".js")) {
-                        echo '<script src="app/asset/javascript/' . $eachJS . '.js"></script>';
+                        echo "<script src='/app/asset/javascript/" . $eachJS . ".js'></script>";
                     }
                 }
             } else {
                 if (file_exists("app/asset/javascript/" . $render . ".js")) {
-                    echo '<script src="app/asset/javascript/' . $render . '.js"></script>';
+                    echo "<script src='/app/asset/javascript/" . $render . ".js'></script>";
                 }
             }
         }

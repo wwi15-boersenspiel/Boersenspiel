@@ -27,6 +27,7 @@ class application
     public static $user_control_path = 'http://localhost/user/control'; //Wird beim der LogIn aufgerufen, rendert keine View sonderte leitet auf die index bzw. LogIn Seite weiter
     public static $user_show_path = 'http://localhost/user/show'; //Zeigt eine Liste aller User an oder ein bestimmter User, falls per $id der Username übergeben wird
     public static $user_delete_path = 'http://localhost/user/delete'; //löscht den per $id übergebenen User
+    public static $user_search_path = 'http://localhost/user/search'; //Lädt Seite zum Suchen von Usern
 
     //Methode die anhand der URL den richtigen Controller und die richtige Methode findet
     //Wird bei jedem Seitenaufruf aufgerufen

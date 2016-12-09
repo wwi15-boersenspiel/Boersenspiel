@@ -16,4 +16,10 @@ class mainController extends application
         $this->setFlashMessage($flashMessage);
         header("Location: " . $path);
     }
+
+    public function respondWithJSON($data) {
+        header('Content-type: application/json');
+        echo json_encode( $data );
+    }
+
 }

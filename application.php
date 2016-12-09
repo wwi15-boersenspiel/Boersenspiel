@@ -31,7 +31,7 @@ class application
 
     //Methode die anhand der URL den richtigen Controller und die richtige Methode findet
     //Wird bei jedem Seitenaufruf aufgerufen
-    public function findController($url) {
+    public static function findController($url) {
 
         //Startet Sessions, falls diese noch nicht gestartet wurden
         if (!isset($_SESSION)) session_start();
@@ -72,11 +72,11 @@ class application
 
             } else {
                 //Ansonsten wird Fehlermeldung ausgegeben
-                $this->trigger_404('Die angeforderte Funktion ist nicht vorhanden');
+                application::trigger_404('Die angeforderte Funktion ist nicht vorhanden');
             }
         } else {
             //Ansonsten wird Fehlermeldung ausgegeben
-            $this->trigger_404('Der angeforderte Controller ist nicht vorhanden');
+            application::trigger_404('Der angeforderte Controller ist nicht vorhanden');
         }
 
 
@@ -84,7 +84,7 @@ class application
 
     //Function die Fehlermeldung ausgibt
 
-    function trigger_404($msg = '')
+    static function trigger_404($msg = '')
     {
         header("HTTP/1.0 404 Not Found");
         header("Status: 404 Not Found");
@@ -93,7 +93,7 @@ class application
 
     //Funktion die bei Aufruf auf den übergebenen Pfad weiterleitet und dabei eine Flashmessage ausgibt
     //Sollte nur im Controller und View verwendet werden
-      public function redirectTo($path, $flashMessage = null)
+    public function redirectTo($path, $flashMessage = null)
     {
         $this->setFlashMessage($flashMessage);
         header("Location: " . $path);

@@ -10,7 +10,7 @@
 <form action="<?php echo parent::$user_control_path;?>" method="post">
     Name:<br>
     <input type="text" name="name"><br>
-Passwort:<br>
+    Passwort:<br>
     <input type="text" name="pw">
     <input type="submit" value="Submit">
 </form>

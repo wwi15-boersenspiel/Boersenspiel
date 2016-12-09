@@ -9,5 +9,11 @@
 
 class mainController extends application
 {
-
+    //Funktion die bei Aufruf auf den übergebenen Pfad weiterleitet und dabei eine Flashmessage ausgibt
+    //Sollte nur im Controller und View verwendet werden
+    public function redirectTo($path, $flashMessage = null)
+    {
+        $this->setFlashMessage($flashMessage);
+        header("Location: " . $path);
+    }
 }

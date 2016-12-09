@@ -50,7 +50,7 @@ if ($showFleshMassages) {
             echo '<div class="alert alert-warning" role="alert">' . $flashMessage[message] . '</div>';
             break;
         case danger:
-            echo '<div class="alert alert-warning" role="alert">' . $flashMessage[message] . '</div>';
+            echo '<div class="alert alert-danger" role="alert">' . $flashMessage[message] . '</div>';
             break;
     }
 }

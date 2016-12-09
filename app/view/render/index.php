@@ -21,3 +21,4 @@
 <a href="<?php echo parent::$user_logout_path;?>">Ausloggen</a>
 <br>
 <a href="<?php echo parent::$user_register_path;?>">Registrieren</a>
+

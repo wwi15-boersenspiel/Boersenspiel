@@ -28,7 +28,7 @@ class application
 
     //Methode die anhand der URL den richtigen Controller und die richtige Methode findet
     //Wird bei jedem Seitenaufruf aufgerufen
-    public function findController($url) {
+    public static function findController($url) {
 
         //Startet Sessions, falls diese noch nicht gestartet wurden
         if (!isset($_SESSION)) session_start();
@@ -47,6 +47,7 @@ class application
         $controller = (strpos($controller, "?") != false) ? substr($controller, 0, strpos($controller, "?")) : $controller;
         $method = (strpos($method, "?") != false) ? substr($method, 0, strpos($method, "?")) : $method;
         $id = (strpos($id, "?") != false) ? substr($id, 0, strpos($id, "?")) : $id;
+
 
         //Falls kein Controller in der URL angegeben wurde, wird home als Standartcontroller definiert
         if (empty($controller)) {
@@ -69,11 +70,11 @@ class application
 
             } else {
                 //Ansonsten wird Fehlermeldung ausgegeben
-                $this->trigger_404('Die angeforderte Funktion ist nicht vorhanden');
+                application::trigger_404('Die angeforderte Funktion ist nicht vorhanden');
             }
         } else {
             //Ansonsten wird Fehlermeldung ausgegeben
-            $this->trigger_404('Der angeforderte Controller ist nicht vorhanden');
+            application::trigger_404('Der angeforderte Controller ist nicht vorhanden');
         }
 
 
@@ -81,20 +82,13 @@ class application
 
     //Function die Fehlermeldung ausgibt
 
-    function trigger_404($msg = '')
+    private static function trigger_404($msg = '')
     {
         header("HTTP/1.0 404 Not Found");
         header("Status: 404 Not Found");
         echo $msg;
     }
 
-    //Funktion die bei Aufruf auf den übergebenen Pfad weiterleitet und dabei eine Flashmessage ausgibt
-    //Sollte nur im Controller und View verwendet werden
-      public function redirectTo($path, $flashMessage = null)
-    {
-        $this->setFlashMessage($flashMessage);
-        header("Location: " . $path);
-    }
 
     //Flash Messages:
     //Flash Messages können im View ausgegeben werden, werden aber nach dem ausgeben wieder gelöscht

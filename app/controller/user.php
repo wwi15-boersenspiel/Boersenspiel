@@ -9,7 +9,7 @@ require_once ('app/controller/mainController.php');
  * Date: 07.12.2016
  * Time: 14:59
  */
-class user extends application
+class user extends mainController
 {
 
     public $request = null;
@@ -41,7 +41,7 @@ class user extends application
         if ($userModel->createUser($this->request["name"], password_hash($this->request["pw"], PASSWORD_DEFAULT))) {
             parent::redirectTo(parent::$home_index_path, "success: Account erfolgreich angelegt");
         } else {
-            parent::redirectTo(parent::$home_login_path, "warning: Account oder ID falsch");
+            parent::redirectTo(parent::$home_create_path, "danger: Es ist ein Fehler aufgetreten");
         }
 
     }
@@ -51,6 +51,8 @@ class user extends application
         if (password_verify($this->request["pw"], $userModel->getByName($this->request["name"])[0]["password"])) {
             parent::setCurrentUser($userModel->getByName($this->request["name"])[0]["name"]);
             parent::redirectTo(parent::$home_index_path, "success: Sie wurden erfolgreich engeloggt");
+        } else {
+            parent::redirectTo(parent::$user_login_path, "warning: Account oder ID falsch");
         }
 
     }

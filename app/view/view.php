@@ -23,7 +23,7 @@ class view extends application
         if ($includeTemplate) include($this->defaultTemplate);
     }
 
-    public function changeTemplate($template) {
+    private function changeTemplate($template) {
         $this->defaultTemplate = 'app/view/template/' . $template . '.php';
     }
 

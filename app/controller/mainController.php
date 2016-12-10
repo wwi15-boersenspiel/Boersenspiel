@@ -11,13 +11,13 @@ class mainController extends application
 {
     //Funktion die bei Aufruf auf den übergebenen Pfad weiterleitet und dabei eine Flashmessage ausgibt
     //Sollte nur im Controller und View verwendet werden
-    public function redirectTo($path, $flashMessage = null)
+    protected function redirectTo($path, $flashMessage = null)
     {
         $this->setFlashMessage($flashMessage);
         header("Location: " . $path);
     }
 
-    public function respondWithJSON($data) {
+    protected function respondWithJSON($data) {
         header('Content-type: application/json');
         echo json_encode( $data );
     }

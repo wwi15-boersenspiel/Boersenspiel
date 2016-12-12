@@ -7,7 +7,7 @@
  */
 ?>
 <!doctype html>
-<html lang="de">
+<html lang="de" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +24,13 @@
     <script src="/app/asset/javascript/application.js"></script>
     <?php $this->includeJS($render); ?>
 </head>
+
 <body>
+<div class="progress" id="loader">
+    <div class="indeterminate"></div>
+</div>
+
+<div style="display:none;" id="myDiv" class="animate-bottom">
 <nav class="light-green accent-3">
     <div class="nav-wrapper">
         <a href="<?php echo parent::$home_index_path?>" class="brand-logo black-text">Logo</a>
@@ -35,6 +41,8 @@
         </ul>
     </div>
 </nav>
+
+
 <?php
 
 if ($showFleshMassages) {
@@ -59,5 +67,6 @@ if ($showFleshMassages) {
 $this->loadRender($render);
 ?>
 <h1>FOOTER</h1>
+</div>
 </body>
 </html>

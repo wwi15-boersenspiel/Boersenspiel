@@ -16,6 +16,8 @@
     Was möchten Sie tun?
 </h2>
 
+
+
 <a href="<?php echo parent::$user_login_path;?>">Einloggen</a>
 <br>
 <a href="<?php echo parent::$user_logout_path;?>/">Ausloggen</a>

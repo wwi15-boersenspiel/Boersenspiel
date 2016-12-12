@@ -13,6 +13,7 @@ require_once ("application.php");
 
 
 //Ruft die Methode findController in der Klasse application auf und übergibt die eingegebene URL
-application::findController($_SERVER['REQUEST_URI']);
+$application = new application();
+$application->findController($_SERVER['REQUEST_URI']);
 
 ?>

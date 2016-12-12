@@ -1,6 +1,7 @@
 <?php
 require_once('app/controller/home.php');
 require_once('app/controller/user.php');
+
 /**
  * Created by PhpStorm.
  * User: lucas
@@ -31,7 +32,11 @@ class application
 
     //Methode die anhand der URL den richtigen Controller und die richtige Methode findet
     //Wird bei jedem Seitenaufruf aufgerufen
-    public static function findController($url) {
+
+    public $defaultRespondAction = true;
+
+    public function findController($url)
+    {
 
         //Startet Sessions, falls diese noch nicht gestartet wurden
         if (!isset($_SESSION)) session_start();
@@ -69,6 +74,12 @@ class application
             if (method_exists($controller, $method)) {
                 //Falls ja wird Methode ausgeführt
                 $controller->$method($id);
+                $view = new view();
+                $view->setVariable(get_object_vars($controller));
+                if ($this->defaultRespondAction) {
+                    $view->loadView($method);
+                }
+
 
             } else {
                 //Ansonsten wird Fehlermeldung ausgegeben
@@ -95,6 +106,7 @@ class application
     //Sollte nur im Controller und View verwendet werden
     public function redirectTo($path, $flashMessage = null)
     {
+        $this->defaultRespondAction = false;
         $this->setFlashMessage($flashMessage);
         header("Location: " . $path);
     }
@@ -130,7 +142,8 @@ class application
     //Liefert Username zurück falls User eingeloggt ist, sonst wird null zurückgegeben
     //Kann im View und im Controller verwendet werden
 
-    public function getCurrentUser() {
+    public function getCurrentUser()
+    {
         if (isset($_SESSION["userName"])) {
             return $_SESSION["userName"];
         } else {
@@ -141,7 +154,8 @@ class application
     //Loggt den übergegebenen User ein, falls null übergeben wird, wird aktueller User ausgeloggt
     //Kann im View und im Controller verwendet werden
 
-    public function setCurrentUser($userName) {
+    public function setCurrentUser($userName)
+    {
         if (is_null($userName)) {
             unset($_SESSION["userName"]);
         } else {

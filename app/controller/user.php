@@ -3,6 +3,7 @@ require_once('app/view/view.php');
 require_once('app/model/userModel.php');
 require_once('application.php');
 require_once('app/controller/mainController.php');
+require ('./vendor/autoload.php');
 
 /**
  * Created by PhpStorm.
@@ -13,7 +14,7 @@ require_once('app/controller/mainController.php');
 class user extends mainController
 {
 
-    public $request = null;
+    private $request = null;
 
     public function __construct($request)
     {
@@ -22,7 +23,27 @@ class user extends mainController
 
     public function index($id = null)
     {
-        echo "keine Indexseite definiert, siehe User Controller";
+        Predis\Autoloader::register();
+        $userModel = new userModel();
+        $client = new Predis\Client();
+        $value = null;
+        if ($client->exists("user")) {
+            echo "Daten kommen aus Redis und leben noch " . $client->ttl("user") . " Sekunden <br>";
+            $value = $client->get("user");
+        } else {
+            echo "Daten sind abgelaufen und wurden neu aus der Datenbank geholt <br>";
+            $value = $client->set("user", $userModel->getByName("Lucas")[0]["name"]);
+            $client->expire("user", 100);
+        }
+        echo $value;
+
+
+
+    }
+
+    public function test($id=null) {
+        $this->name = "lucas";
+        $this->hallo = "hallo";
     }
 
     public function login($id = null)

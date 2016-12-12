@@ -16,6 +16,14 @@ class view extends application
         $this->parameter[$key] = $value;
     }
 
+    public function setVariable() {
+        $variables = func_get_args()[0];
+        while ($variable = current($variables)) {
+            $this->{key($variables)} = $variable;
+            next($variables);
+        }
+    }
+
     public function loadView($render = null, $includeTemplate = true, $showFleshMassages = true) {
         //Fügt Navbar und Footer hinzu und ruft dann loadRender($render) auf
         //$render ist der im Controller->loadView() übergebene Paramneter

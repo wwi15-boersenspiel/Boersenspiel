@@ -1,5 +1,5 @@
 <?php
-require_once ('app/view/view.php');
+require_once ('app/view/renderEngine.php');
 require_once ('app/model/userModel.php');
 require_once ('application.php');
 require_once ('app/controller/mainController.php');
@@ -12,36 +12,34 @@ require_once ('app/controller/mainController.php');
 class user extends mainController
 {
 
-    public $request = null;
+    private $request = null;
+
 
     public function __construct($request)
     {
         $this->request = $request;
     }
 
-    public function index($id = null) {
-
-    }
 
     public function login($id = null) {
-        $userView = new view();
-        $userView->loadView("login");
-
 
     }
 
     public function register($id = null) {
-        $userView = new view();
-        $userView->loadView("register");
+
+    }
+
+    public function pwaendern($id = null) {
+        $this->name = "lucas";
 
     }
 
     public function create($id = null) {
         $userModel = new userModel();
         if ($userModel->createUser($this->request["name"], password_hash($this->request["pw"], PASSWORD_DEFAULT))) {
-            parent::redirectTo(parent::$home_index_path, "success: Account erfolgreich angelegt");
+            $this->redirectTo($this->getPath("home"), "success: Account erfolgreich angelegt");
         } else {
-            parent::redirectTo(parent::$home_create_path, "danger: Es ist ein Fehler aufgetreten");
+            $this->redirectTo($this->getPath("user", "register"), "danger: Es ist ein Fehler aufgetreten");
         }
 
     }
@@ -49,18 +47,18 @@ class user extends mainController
     public function control($id = null) {
         $userModel = new userModel();
         if (password_verify($this->request["pw"], $userModel->getByName($this->request["name"])[0]["password"])) {
-            parent::setCurrentUser($userModel->getByName($this->request["name"])[0]["name"]);
-            parent::redirectTo(parent::$home_index_path, "success: Sie wurden erfolgreich engeloggt");
+            $this->setCurrentUser($userModel->getByName($this->request["name"])[0]["name"]);
+            $this->redirectTo($this->getPath("home"), "success: Sie wurden erfolgreich engeloggt");
         } else {
-            parent::redirectTo(parent::$user_login_path, "warning: Account oder ID falsch");
+            $this->redirectTo($this->getPath("user", "login"), "warning: Account oder ID falsch");
         }
 
     }
 
 
     public function logout($id = null) {
-        parent::setCurrentUser(null);
-        parent::redirectTo(parent::$home_index_path, "success: Sie wurden ausgeloggt");
+        $this->setCurrentUser(null);
+        $this->redirectTo($this->getPath("home"), "success: Sie wurden ausgeloggt");
 
     }
 }

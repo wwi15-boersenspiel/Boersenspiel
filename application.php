@@ -28,7 +28,11 @@ class application
 
     //Methode die anhand der URL den richtigen Controller und die richtige Methode findet
     //Wird bei jedem Seitenaufruf aufgerufen
-    public static function findController($url) {
+
+    public $defaultRespondAction = true;
+
+
+    public function findController($url) {
 
         //Startet Sessions, falls diese noch nicht gestartet wurden
         if (!isset($_SESSION)) session_start();
@@ -67,6 +71,11 @@ class application
             if (method_exists($controller, $method)) {
                 //Falls ja wird Methode ausgeführt
                 $controller->$method($id);
+                $view = new renderEngine();
+                $view->setVariable(get_object_vars($controller));
+                if ($this->defaultRespondAction) {
+                    $view->loadView($method);
+                }
 
             } else {
                 //Ansonsten wird Fehlermeldung ausgegeben

@@ -1,5 +1,5 @@
 <?php
-require_once ('app/view/view.php');
+require_once ('app/view/renderEngine.php');
 require_once ('app/model/userModel.php');
 require_once ('app/controller/mainController.php');
 /**
@@ -25,7 +25,5 @@ class home extends mainController
 
 
 
-        $indexView = new view();
-        $indexView->loadView("index");
     }
 }

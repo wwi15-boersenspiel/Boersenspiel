@@ -1,6 +1,6 @@
 <?php
 require_once ('app/controller/mainController.php'); //wird benötigt
-require_once ('app/view/view.php'); //wird benötigt falls Views verwendet werden
+require_once ('app/view/renderEngine.php'); //wird benötigt falls Views verwendet werden
 require_once ('app/model/modelname.php'); //name muss angepasst werden, wird benötigt falls Models verwendet wird
 /**
  * Created by PhpStorm.

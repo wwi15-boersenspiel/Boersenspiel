@@ -33,14 +33,18 @@ class userModel extends mainModel
 
    public function saveUserToDB($saveMe){
    	$conn = $this->createConn();
+   	$status = false;
     	$sql = "INSERT INTO user2 (username, password, email, securityQuestion, securityAnswer)
         VALUES ('" . $this->username . "', '" . $this->password . "', '" . $this->email . "', '" . $this->securityQuestion . "', '" . $this->securityAnswer . "')";
     	if ($this->conn->query($sql) === TRUE) {
-    		return true;
+    		$status = true;
     	} else {
-    		return false;
+    		$status = false;
     	}
-    $this->closeConn($conn);	
+        $this->closeConn($conn);
+
+    	return $status;
+
     }
 
 

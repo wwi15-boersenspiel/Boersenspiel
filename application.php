@@ -77,6 +77,7 @@ class application
                     $view->loadView($method);
                 }
 
+
             } else {
                 //Ansonsten wird Fehlermeldung ausgegeben
                 application::trigger_404('Die angeforderte Funktion ist nicht vorhanden');

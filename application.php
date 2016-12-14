@@ -98,6 +98,10 @@ class application
         echo $msg;
     }
 
+    public function getPath($controller, $method = "index") {
+        return "/".$controller."/".$method;
+    }
+
 
     //Flash Messages:
     //Flash Messages können im View ausgegeben werden, werden aber nach dem ausgeben wieder gelöscht

@@ -21,8 +21,8 @@ class home extends mainController
 
     public function index($id) {
 
-        $userModel = new userModel();
-
+        $userModel = new userModel('diesiszuzukurz', 'chef', 'gehtdichnixan@web.de', 'abc', 'abcd');
+		$userModel->saveToDB($userModel);
 
 
     }

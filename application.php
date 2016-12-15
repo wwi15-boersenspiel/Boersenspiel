@@ -29,7 +29,7 @@ class application
     //Methode die anhand der URL den richtigen Controller und die richtige Methode findet
     //Wird bei jedem Seitenaufruf aufgerufen
 
-    public $defaultRespondAction = true;
+    public static $defaultRespondAction = true;
 
 
     public function findController($url) {
@@ -73,7 +73,7 @@ class application
                 $controller->$method($id);
                 $view = new renderEngine();
                 $view->setVariable(get_object_vars($controller));
-                if ($this->defaultRespondAction) {
+                if (self::$defaultRespondAction) {
                     $view->loadView($method);
                 }
 

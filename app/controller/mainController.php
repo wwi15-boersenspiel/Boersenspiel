@@ -13,6 +13,7 @@ class mainController extends application
     //Sollte nur im Controller und View verwendet werden
     protected function redirectTo($path, $flashMessage = null)
     {
+        parent::$defaultRespondAction = false;
         $this->setFlashMessage($flashMessage);
         header("Location: " . $path);
     }

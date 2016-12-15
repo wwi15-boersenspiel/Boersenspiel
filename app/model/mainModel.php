@@ -9,37 +9,24 @@
 class mainModel extends application
 {
 
-    public function createConn() {
+    public static function createConn() {
         $servername = "localhost";
         $username = "root";
         $password = "";
         $dbname = "dhbw";
 
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        if ($conn->connect_error) {
-            return die("Connection failed: " . $conn->connect_error);
-        } else {
-            return $conn;
-        }
-
-
-    }
-
-    public function createArray($result) {
-        $returnResult = array();
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $returnResult[] = $row;
-            }
-            return $returnResult;
-        } else {
+        try {
+            return $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        } catch (PDOException $e) {
             return null;
         }
+
+
     }
 
-    public function closeConn($conn) {
-        $conn->close();
+
+    public static function closeConn($conn) {
+        $conn = null;
     }
 
 
